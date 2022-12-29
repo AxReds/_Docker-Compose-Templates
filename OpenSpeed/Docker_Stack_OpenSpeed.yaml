@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+    OpenSpeedTest:
+        image: openspeedtest/latest:latest
+        ports:
+          - 8181:8080
+        restart: unless-stopped
+        

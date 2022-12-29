@@ -1,0 +1,40 @@
+#
+# Script: Docker-Compose_Grafana_OSS
+# Copyright (C) 2021 Alessio Rossini <alessior@live.com>
+# Original source code available at https://github.com/AxReds
+#
+# Purpose: Create a container for running Grafana with Docker
+# Author: Alessio Rossini <alessior@live.com>
+# 
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation;
+# either version 2 of the License, or any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details
+# https://opensource.org/
+#
+# You should have received a copy of the GNU General Public License along with this program; 
+# if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+#
+version: '3'
+
+volumes:
+  grafana-data:
+    driver: local
+
+services:
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - "4000:3000"
+    volumes:
+    #  - grafana-data:/var/lib/grafana #Original persisten volume
+      - /home/pi/_Docker_Containers_Persistent_Data/grafana-oss_grafana-data/_data:/var/lib/grafana #customized PV. Remember to change file permissions if start fails
+    restart: unless-stopped
+    
+    

@@ -1,0 +1,49 @@
+#
+# Script: Docker_Stack_WatchTower
+# Copyright (C) 20201 Alessio Rossini <alessior@live.com>
+# Original source code available at https://github.com/AxReds
+#
+# Purpose: Create a Docker Stack for running WatchTower
+# Author: Alessio Rossini <alessior@live.com>
+# Descriptipon
+# 
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation;
+# either version 2 of the License, or any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details
+# https://opensource.org/
+#
+# You should have received a copy of the GNU General Public License along with this program; 
+# if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+#
+#
+# -------------------------------------------------------
+---
+version: '2.1'
+services:
+    watchtower:
+        image: containrrr/watchtower:latest
+        container_name: watchtower
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - TZ=Europe/Rome
+            - WATCHTOWER_MONITOR_ONLY=true
+            - WATCHTOWER_SCHEDULE=0 0 */1 * * *
+            - WATCHTOWER_CLEANUP=true
+            - WATCHTOWER_NOTIFICATIONS=email
+            - WATCHTOWER_NOTIFICATION_EMAIL_FROM=YOUR_FROM_EMAIL_ADDRESS
+            - WATCHTOWER_NOTIFICATION_EMAIL_TO=YOUR_TO_EMAIL_ADDRESS
+            - WATCHTOWER_NOTIFICATION_EMAIL_SUBJECTTAG=Pi Server Container Updates
+            - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=YOUR_SMTP_RELAY_ADDRESS
+            - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=YOUR_SMTP_RELAY_USER_ACCOUNT
+            - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=YOUR_SMTP_RELAY_PASSWORD       
+            - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=587
+            - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
+        restart: unless-stopped
+        

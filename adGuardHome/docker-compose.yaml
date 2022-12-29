@@ -1,0 +1,47 @@
+#
+# Script: Docker-Compose_adGuardHome
+# Copyright (C) 2021 Alessio Rossini <alessior@live.com>
+# Original source code available at https://github.com/AxReds
+#
+# Purpose: Create a Docker Stack for running adGuard Home 
+# Author: Alessio Rossini <alessior@live.com>
+# 
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation;
+# either version 2 of the License, or any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details
+# https://opensource.org/
+#
+# You should have received a copy of the GNU General Public License along with this program; 
+# if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+#
+# This improved version starts from the idea of Alexander Bilz https://gist.github.com/lxndrblz
+# Original source code at https://gist.github.com/lxndrblz/27e6ca08363bbc8be994a2f7b1a9d523
+#
+#
+# -------------------------------------------------------
+
+version: "3"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    ports:
+      - 53:53/tcp #DNS
+      - 53:53/udp #DNS
+      - 67:67/udp #BOOTP
+      - 68:68/tcp #BOOTP
+      #- 68:68/udp #BOOTP --> SOMETIMES ALREADY IN USE BY RASPBERRY
+      - 853:853/tcp #DNS OVER TLS
+      - 8080:80/tcp #WEB DASHBOARD change this to something like 8080:80 if port 80 is already in use
+      - 3000:3000/tcp #UNKNOWN
+    volumes:
+      - /home/pi/_Docker_Containers_Persistent_Data/adguardhome/data/work:/opt/adguardhome/work
+      - /home/pi/_Docker_Containers_Persistent_Data/adguardhome/data/conf:/opt/adguardhome/conf
+    restart: unless-stopped
+    

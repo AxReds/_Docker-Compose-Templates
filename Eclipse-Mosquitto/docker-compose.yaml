@@ -1,0 +1,54 @@
+#
+# Script: Docker_Stack_Eclipse_Mosquitto
+# Copyright (C) 2021 Alessio Rossini <alessior@live.com>
+# Original source code available at https://github.com/AxReds
+#
+# Purpose: Create a docker-compose for running Eclipse Mosquitto MQTT Brokerker with Docker
+# Author: Alessio Rossini <alessior@live.com>
+# 
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation;
+# either version 2 of the License, or any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details
+# https://opensource.org/
+#
+# You should have received a copy of the GNU General Public License along with this program; 
+# if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+#
+#Instructions:
+# - create the directory structure before running the yaml file.
+# - The full and original mosquitto.config file from Eclipse.org can be found at https://github.com/eclipse/mosquitto/blob/master/mosquitto.conf
+#   documentation can be found here https://mosquitto.org/man/mosquitto-conf-5.html
+# - Remember to configure/enable the following keys:
+#    password_file /mosquitto/config/<password_filename>
+#    persistence true #default is false
+#    persistence_location /mosquitto/data
+#    log_dest file /mosquitto/log/<filename>
+#    listener 1883 0.0.0.0 #default configuration accepts connections only from local-to-mqtt-server clients
+# - To configure a username/password use the following commands:
+#    1) attach to the running docker container ==> sudo docker exec -it <container_name> sh
+#    2) change directory to where configuration are stored ==> cd /mosquitto/config
+#    3) execute the following command and follow the instruction on the screen ==> mosquitto_passwd -c /mosquitto/config/<password_filename> <username>
+#    4) if everything is running fine you should have a <password_filename> in your persistent folder 
+#
+#
+version: '3'
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    ports: 
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - /home/pi/_Docker_Containers_Persistent_Data/mosquitto/mosquitto_data/config/:/mosquitto/config/ #folder where to store configurations like password.txt
+      - /home/pi/_Docker_Containers_Persistent_Data/mosquitto/mosquitto_data/config/mosquitto.conf:/mosquitto/config/mosquitto.conf #configuration file
+      - /home/pi/_Docker_Containers_Persistent_Data/mosquitto/mosquitto_data/data/:/mosquitto/data #data will be persistently stored here
+      - /home/pi/_Docker_Containers_Persistent_Data/mosquitto/mosquitto_data/log/:/mosquitto/log #log will be created here
+    restart: unless-stopped
+     
