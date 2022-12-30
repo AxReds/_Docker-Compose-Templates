@@ -1,0 +1,42 @@
+#
+# Script: Docker-Compose_Node-Red
+# Copyright (C) 2022 Alessio Rossini <alessior@live.com>
+# Original source code available at https://github.com/AxReds
+#
+# Purpose: Create a docker container for running Node-Red
+# Author: Alessio Rossini <alessior@live.com>
+# 
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation;
+# either version 2 of the License, or any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details
+# https://opensource.org/
+#
+# You should have received a copy of the GNU General Public License along with this program; 
+# if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+#
+version: "3.7"
+services:
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
+    environment:
+      - TZ=Europe/Rome
+    ports:
+      - 1880:1880
+      - 3456:3456 #to use if Alexa integration is enabled
+    volumes:
+      - /home/pi/_Docker_Containers_Persistent_Data/node-red/data/:/data
+    restart: unless-stopped
+#    networks:
+#      - node-red-net
+
+
+
+#networks:
+#  node-red-net:
