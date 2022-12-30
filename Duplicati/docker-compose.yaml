@@ -1,6 +1,6 @@
 #
 # Script: Docker-Compose_Duplicati
-# Copyright (C) 2021 Alessio Rossini <alessior@live.com>
+# Copyright (C) 2022 Alessio Rossini <alessior@live.com>
 # Original source code available at https://github.com/AxReds
 #
 # Purpose: Create a docker container for running Duplicati

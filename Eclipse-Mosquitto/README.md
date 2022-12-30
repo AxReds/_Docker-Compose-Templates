@@ -1,5 +1,6 @@
 # _Docker-Compose_Eclipse-Mosquitto
-The script will create a container for running Eclipse Mosquitto MQTT broker with Docker. Remember to modify the name of the container in the script with your own.
+The script will create a container for running Eclipse Mosquitto MQTT broker with Docker.
+Remember to modify the name of the container in the script with your own.
 
 Instructions:
  - create the directory structure before running the yaml file.
