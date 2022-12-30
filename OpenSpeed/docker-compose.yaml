@@ -1,9 +1,9 @@
 #
-# Script: Docker-Compose_Grafana_OSS
+# Script: Docker-Compose_OpenSpeed
 # Copyright (C) 2021 Alessio Rossini <alessior@live.com>
 # Original source code available at https://github.com/AxReds
 #
-# Purpose: Create a docker container for running Grafana OSS
+# Purpose: Create a docker container for running OpenSpeed by Ookla
 # Author: Alessio Rossini <alessior@live.com>
 # 
 #
@@ -20,21 +20,12 @@
 # if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 #
-version: '3'
-
-volumes:
-  grafana-data:
-    driver: local
+version: '2'
 
 services:
-  grafana:
-    image: grafana/grafana-oss:latest
-    container_name: grafana
-    ports:
-      - "4000:3000"
-    volumes:
-    #  - grafana-data:/var/lib/grafana #Original persisten volume
-      - /home/pi/_Docker_Containers_Persistent_Data/grafana-oss_grafana-data/_data:/var/lib/grafana #customized PV. Remember to change file permissions if start fails
-    restart: unless-stopped
-    
-    
+    OpenSpeedTest:
+        image: openspeedtest/latest:latest
+        ports:
+          - 8181:8080
+        restart: unless-stopped
+        

@@ -1,9 +1,9 @@
 #
-# Script: Docker_Stack_PiHole
-# Copyright (C) 2022 Alessio Rossini <alessior@live.com>
+# Script: Docker-Compose_PiHole
+# Copyright (C) 2021 Alessio Rossini <alessior@live.com>
 # Original source code available at https://github.com/AxReds
 #
-# Purpose: Create a Docker Stack for running PiHole DNS Service aside to any other container or DNS Service
+# Purpose: Create a docker container for running PiHole DNS 
 # Author: Alessio Rossini <alessior@live.com>
 # 
 #
@@ -20,12 +20,6 @@
 # if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 #
-# This improved version starts from the idea of Alexander Bilz https://gist.github.com/lxndrblz
-# Original source code at https://gist.github.com/lxndrblz/27e6ca08363bbc8be994a2f7b1a9d523
-#
-#
-# -------------------------------------------------------
----
 version: "3"
 
 services:

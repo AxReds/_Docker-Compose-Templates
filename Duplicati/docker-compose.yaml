@@ -3,7 +3,7 @@
 # Copyright (C) 2021 Alessio Rossini <alessior@live.com>
 # Original source code available at https://github.com/AxReds
 #
-# Purpose: Create a Docker Stack for running adGuard Home 
+# Purpose: Create a docker container for running Duplicati
 # Author: Alessio Rossini <alessior@live.com>
 # 
 #
@@ -22,7 +22,8 @@
 # IMPORTANT!
 # source files & folders are stored under "Computer/source" so, please, expand the folders three and do not expect to have
 # them under "User Data" or the "/source" folder in the root of the backup page.
-
+#
+#
 version: "3"
 services:
   duplicati:
